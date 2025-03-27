@@ -56,6 +56,18 @@ export const signInAction = async (formData: FormData) => {
   return redirect("/protected");
 };
 
+export const signInAnonymously = async (formData: FormData) => {
+  const supabase = await createClient();
+
+  const { error } = await supabase.auth.signInAnonymously();
+
+  if (error) {
+    return encodedRedirect("error", "/ano", error.message);
+  }
+
+  return redirect("/protected");
+};
+
 export const forgotPasswordAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
   const supabase = await createClient();
