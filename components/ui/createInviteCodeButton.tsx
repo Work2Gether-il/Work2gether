@@ -12,6 +12,7 @@ export default function CreateInviteButton({code}:InviteButtonProps){
     const [loading, setLoading] = useState(false);
     const [slugId,setSlugId] = useState();
     const [sessionId,setSessionId] = useState();
+    const [session,setSession] = useState();
     const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
     const supabase = createClient();
     const tokenSize = 6;
@@ -52,6 +53,21 @@ export default function CreateInviteButton({code}:InviteButtonProps){
         setSnackbar({ open: true, message: 'Erreur lors de la génération du code', severity: 'error' });
       }
 
+      useEffect(() => {
+        const fetchSession = async () => {
+          const { data: { session } } = await supabase.auth.getSession();
+          setSession(session);
+        };
+    
+        fetchSession();
+    
+        const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+          setSession(session);
+        });
+    
+        return () => authListener.subscription.unsubscribe();
+      }, []);
+    
     useEffect(() =>{
         const fetchSessionId = async () =>{
             const {data, error} = await supabase
@@ -83,6 +99,7 @@ export default function CreateInviteButton({code}:InviteButtonProps){
             .insert([{
                 session_id: sessionId,
                 token: unique_token,
+                user_id : session.user.id,
             }])
             .select()
             if (error) throw error;
