@@ -7,7 +7,7 @@ import TopBar from "./topbar";
 
 const Room = () => {
   return (
-    <Box sx={{ height: "100vh", display: "flex", flexDirection: "column" }}>
+    <Box sx={{ height: "100vh", display: "flex", flexDirection: "column", width:"100%" }}>
         <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
         <TopBar sx={{ flexShrink: 0 }} />
 
