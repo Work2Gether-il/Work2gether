@@ -16,7 +16,7 @@ export default async function salle({
     if(data){
         return(
             <Box>
-                <CreateInviteButton code={slug}/>
+                <CreateInviteButton code={slug} isOwner={false} title=""/>
             </Box>
         );
     }

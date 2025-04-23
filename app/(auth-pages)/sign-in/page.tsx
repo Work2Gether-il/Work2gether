@@ -3,11 +3,14 @@ import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { signInAnonymously } from "@/app/actions";
 import Link from "next/link";
+import { Box } from "@mui/material";
 
 export default async function Login(props: { searchParams: Promise<Message> }) {
   const searchParams = await props.searchParams;
   return (
+    <Box>
     <form className="flex-1 flex flex-col min-w-64">
       <h1 className="text-2xl font-medium">Sign in</h1>
       <p className="text-sm text-foreground">
@@ -37,8 +40,16 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
         <SubmitButton pendingText="Signing In..." formAction={signInAction}>
           Sign in
         </SubmitButton>
+        
         <FormMessage message={searchParams} />
       </div>
     </form>
+    <form className="flex-1 flex flex-col min-w-64">
+    <SubmitButton pendingText="Signing In..." formAction={signInAnonymously}>
+      Sign in anonymously
+    </SubmitButton>
+    <FormMessage message={searchParams} />
+  </form>
+  </Box>
   );
 }

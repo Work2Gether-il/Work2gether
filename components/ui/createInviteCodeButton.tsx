@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import { createClient } from '@/utils/supabase/client';
 
 interface InviteButtonProps{
-    code : string
+    code : string,
+    isOwner : boolean,
+    title : string
 }
 
 
-export default function CreateInviteButton({code}:InviteButtonProps){
+export default function CreateInviteButton({code,isOwner,title}:InviteButtonProps){
     const [loading, setLoading] = useState(false);
     const [slugId,setSlugId] = useState();
     const [sessionId,setSessionId] = useState();
@@ -69,24 +71,38 @@ export default function CreateInviteButton({code}:InviteButtonProps){
       }, []);
     
     useEffect(() =>{
-        const fetchSessionId = async () =>{
-            const {data, error} = await supabase
-            .from('InviteSlugs')
-            .select('id')
-            .eq('code',code)
-            .maybeSingle();
-
-            const slugId = data?.id;
-            setSlugId(slugId)
-            const {data:session_id, error:session_error} = await supabase
-            .from('Sessions')
-            .select('id')
-            .eq('slug',slugId)
-            .maybeSingle();
-
-            setSessionId(session_id?.id)
+        if(isOwner){
+            const fetchSessionId = async () =>{
+                const {data:session_id, error:session_error} = await supabase
+                .from('Sessions')
+                .select('id')
+                .eq('slug',code)
+                .maybeSingle();
+    
+                setSessionId(session_id?.id)
+            }
+            fetchSessionId()
         }
-        fetchSessionId()
+        else{
+            const fetchSessionId = async () =>{
+                const {data, error} = await supabase
+                .from('InviteSlugs')
+                .select('id')
+                .eq('code',code)
+                .maybeSingle();
+    
+                const slugId = data?.id;
+                setSlugId(slugId)
+                const {data:session_id, error:session_error} = await supabase
+                .from('Sessions')
+                .select('id')
+                .eq('slug',slugId)
+                .maybeSingle();
+    
+                setSessionId(session_id?.id)
+            }
+            fetchSessionId()
+        } 
     },[code])
 
     const handleSubmit = async () =>{
@@ -115,30 +131,58 @@ export default function CreateInviteButton({code}:InviteButtonProps){
         }
     }
 
+    
+
     const handleCloseSnackbar = () => {
         setSnackbar({ ...snackbar, open: false });
       };
-
-    return(
-        <Box sx={{ maxWidth: 400, mx: 'auto', mt: 4 }}>
-            <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSubmit}
-            disabled={loading}
-            fullWidth
-            >
-                {loading ? 'Rejoindre la salle...' : 'Rejoindre la salle'}
-            </Button>
-            <Snackbar
-                open={snackbar.open}
-                autoHideDuration={6000}
-                onClose={handleCloseSnackbar}
-            >
-                <Alert onClose={handleCloseSnackbar} severity={snackbar.severity} sx={{ width: '100%' }}>
-                {snackbar.message}
-                </Alert>
-            </Snackbar>
-        </Box>
-    )
+    
+    if(isOwner){
+        return(
+            <Box sx={{ maxWidth: 400, mx: 'auto', mt: 4 }}>
+                <Button
+                variant="contained"
+                color="primary"
+                onClick={handleSubmit}
+                disabled={loading}
+                fullWidth
+                >
+                    {title}
+                </Button>
+                <Snackbar
+                    open={snackbar.open}
+                    autoHideDuration={6000}
+                    onClose={handleCloseSnackbar}
+                >
+                    <Alert onClose={handleCloseSnackbar} severity={snackbar.severity} sx={{ width: '100%' }}>
+                    {snackbar.message}
+                    </Alert>
+                </Snackbar>
+            </Box>
+        )
+    }
+    else{
+        return(
+            <Box sx={{ maxWidth: 400, mx: 'auto', mt: 4 }}>
+                <Button
+                variant="contained"
+                color="primary"
+                onClick={handleSubmit}
+                disabled={loading}
+                fullWidth
+                >
+                    {loading ? 'Rejoindre la salle...' : 'Rejoindre la salle'}
+                </Button>
+                <Snackbar
+                    open={snackbar.open}
+                    autoHideDuration={6000}
+                    onClose={handleCloseSnackbar}
+                >
+                    <Alert onClose={handleCloseSnackbar} severity={snackbar.severity} sx={{ width: '100%' }}>
+                    {snackbar.message}
+                    </Alert>
+                </Snackbar>
+            </Box>
+        )
+    }
 }

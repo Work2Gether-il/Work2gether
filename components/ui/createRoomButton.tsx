@@ -104,12 +104,23 @@ export default function CreateEntryButton() {
       if (error) throw error;
       setInputValue('');
       setSnackbar({ open: true, message: 'Entrée créée avec succès!', severity: 'success' });
-
+      if(!session.user.is_anonymous){
+        const {data:room_data,error:room_error} = await supabase
+            .from('Rooms')
+            .insert([{
+              owner : session.user.id,
+              name : inputValue,
+              slug: slugId,
+            }])
+            .select();
+        if (room_error) throw room_error;
+      }
       window.location.href = `/test/${newSlugCode}`;
     } catch (error) {
       console.error('Error creating entry:', error);
       setSnackbar({ open: true, message: error.message || 'Erreur lors de la création', severity: 'error' });
-    } finally {
+    }
+    finally {
       setLoading(false);
     }
   };

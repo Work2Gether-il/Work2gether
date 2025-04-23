@@ -58,6 +58,15 @@ export default function RootLayout({
                         <Link href="/test">test</Link>
                       </Button>
                     </div>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        asChild
+                        size="sm"
+                        variant={"default"}
+                      >
+                        <Link href="/myRooms">Mes salles</Link>
+                      </Button>
+                    </div>
                   </div>
                   {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
                 </div>

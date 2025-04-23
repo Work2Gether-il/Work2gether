@@ -4,7 +4,8 @@ import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { createClient } from "@/utils/supabase/server";
-
+import { SubmitButton } from "./submit-button";
+import { FormMessage } from "./form-message";
 export default async function AuthButton() {
   const supabase = await createClient();
 
