@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package-lock.json package.json ./
 
 # Installation des dépendances
-RUN npm install
+RUN npm ci
 
 # Copie des fichiers de configuration
 COPY tsconfig.json next.config.ts ./
