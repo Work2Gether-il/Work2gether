@@ -1,0 +1,26 @@
+name: ams-il-dev
+services:
+  next-app:
+    container_name: next-app
+    build:
+      context: ..
+      dockerfile: ./docker/next-dev.Dockerfile
+    ports:
+      - 3001:3000
+    env_file:
+      - .env
+    # volumes:
+    #   - ../:/app
+    restart: unless-stopped
+  node:
+    container_name: node-server
+    build:
+      context: ..
+      dockerfile: ./docker/node-dev.Dockerfile
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    # volumes:
+    #   - ../:/app
+    restart: unless-stopped
