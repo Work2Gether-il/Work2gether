@@ -121,7 +121,7 @@ export default function CreateInviteButton({code,isOwner,title}:InviteButtonProp
             if (error) throw error;
             setSnackbar({ open: true, message: "salle en cours d'accée", severity: 'success' });
 
-            window.location.href = `/test/salle/${unique_token}`;
+            window.location.href = `/room/${unique_token}`;
         }
         catch(error){
             setSnackbar({ open: true, message: error.message || 'Erreur lors de la création de la salle', severity: 'error' });

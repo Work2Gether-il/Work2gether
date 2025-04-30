@@ -55,7 +55,7 @@ export const signInAction = async (formData: FormData) => {
     return encodedRedirect("error", "/sign-in", error.message);
   }
 
-  return redirect("/protected");
+  return redirect("/");
 };
 
 export const signInAnonymously = async (formData: FormData) => {
@@ -67,7 +67,7 @@ export const signInAnonymously = async (formData: FormData) => {
     return encodedRedirect("error", "/ano", error.message);
   }
 
-  return redirect("/protected");
+  return redirect("/");
 };
 
 export const forgotPasswordAction = async (formData: FormData) => {

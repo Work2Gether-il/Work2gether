@@ -115,7 +115,7 @@ export default function CreateEntryButton() {
             .select();
         if (room_error) throw room_error;
       }
-      window.location.href = `/test/${newSlugCode}`;
+      window.location.href = `/createRoom/${newSlugCode}`;
     } catch (error) {
       console.error('Error creating entry:', error);
       setSnackbar({ open: true, message: error.message || 'Erreur lors de la création', severity: 'error' });
