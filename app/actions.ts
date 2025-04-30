@@ -4,6 +4,8 @@ import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { UUID } from "crypto";
+import { console } from "inspector";
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
@@ -53,7 +55,7 @@ export const signInAction = async (formData: FormData) => {
     return encodedRedirect("error", "/sign-in", error.message);
   }
 
-  return redirect("/protected");
+  return redirect("/");
 };
 
 export const signInAnonymously = async (formData: FormData) => {
@@ -65,7 +67,7 @@ export const signInAnonymously = async (formData: FormData) => {
     return encodedRedirect("error", "/ano", error.message);
   }
 
-  return redirect("/protected");
+  return redirect("/");
 };
 
 export const forgotPasswordAction = async (formData: FormData) => {
@@ -144,3 +146,20 @@ export const signOutAction = async () => {
   await supabase.auth.signOut();
   return redirect("/sign-in");
 };
+
+export const creerSalleAction = async (formData: FormData, userId:UUID, roomId:UUID) => {
+  const supabase = await createClient();
+  const titre = formData.get("titre")
+  const {data,error} = await supabase
+  .from('Session')
+  .insert([
+    {room_id: roomId, title: titre, creator_id: userId},
+  ])
+  .select()
+
+  
+  if(error){
+    console.log(error)
+  }
+};
+
