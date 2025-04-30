@@ -1,34 +1,23 @@
-# syntax=docker.io/docker/dockerfile:1
-
 FROM node:23-alpine
 
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i; \
-  # Allow install without lockfile, so example works even without Node.js installed locally
-  else echo "Warning: Lockfile not found. It is recommended to commit lockfiles to version control." && yarn install; \
-  fi
+# Copie les fichiers de dépendances
+COPY package-lock.json package.json ./
 
-COPY src ./src
-COPY public ./public
-COPY next.config.js .
-COPY tsconfig.json .
+# Installation des dépendances
+RUN npm install
 
-# Next.js collects completely anonymous telemetry data about general usage. Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line to disable telemetry at run time
-# ENV NEXT_TELEMETRY_DISABLED 1
+# Copie des fichiers de configuration
+COPY tsconfig.json next.config.ts ./
+COPY next-env.d.ts postcss.config.js tailwind.config.ts ./
 
-# Note: Don't expose ports here, Compose will handle that for us
+# Copie du code source
+ADD app app
+ADD components components
+ADD lib lib
+ADD utils utils
+COPY components.json middleware.ts ./
 
-# Start Next.js in development mode based on the preferred package manager
-CMD \
-  if [ -f yarn.lock ]; then yarn dev; \
-  elif [ -f package-lock.json ]; then npm run dev; \
-  elif [ -f pnpm-lock.yaml ]; then pnpm dev; \
-  else npm run dev; \
-  fi
+# Lancement en mode développement
+CMD npm run dev
