@@ -11,8 +11,8 @@ export default function VideoPlayer({ url, roomId }) {
   const socketRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [seeking, setSeeking] = useState(false);
+  const [muted, setMuted] = useState(true);
   const isRemoteActionRef = useRef(false);
-
   useEffect(() => {
     socketRef.current = io("http://localhost:3000");
 

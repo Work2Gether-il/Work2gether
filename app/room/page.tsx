@@ -6,8 +6,8 @@ export default function room(){
         <Box>
             <h1>video player</h1>
             <VideoPlayer
-            url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" 
-            roomId="room123"/>
+            url={"https://www.youtube.com/watch?v=xvFZjo5PgG0"} 
+            roomId={"room123"}/>
         </Box>
     )
 }
