@@ -6,6 +6,7 @@ import { InfoIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 export default async function ProtectedPage() {
   const supabase = await createClient();
@@ -40,6 +41,7 @@ export default async function ProtectedPage() {
             >
               <Link href="/createRoom">create Room</Link>
             </Button>
+            <ThemeSwitcher/>
       </main>
 
       <div>

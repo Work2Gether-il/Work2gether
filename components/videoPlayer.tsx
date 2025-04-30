@@ -72,7 +72,7 @@ export default function VideoPlayer({ url, roomId }) {
   };
 
   return (
-    <div>
+
       <ReactPlayer
         ref={playerRef}
         url={url}
@@ -82,8 +82,8 @@ export default function VideoPlayer({ url, roomId }) {
         onPause={handlePause}
         onSeek={handleSeek}
         width="100%"
-        height="500px"
+        height="85%"
       />
-    </div>
+
   );
 }
