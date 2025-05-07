@@ -4,7 +4,7 @@ import React, { useRef, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { io } from "socket.io-client";
 
-const ReactPlayer = dynamic(() => import('react-player/youtube'), { ssr: false });
+const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
 export default function VideoPlayer({ url, roomId }) {
   const playerRef = useRef(null);
