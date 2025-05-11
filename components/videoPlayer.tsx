@@ -13,8 +13,13 @@ export default function VideoPlayer({ url, roomId }) {
   const [seeking, setSeeking] = useState(false);
   const [muted, setMuted] = useState(true);
   const isRemoteActionRef = useRef(false);
+  
+  const nodeURL = process.env.NEXT_PUBLIC_NODE_URL
+  ? `${process.env.NEXT_PUBLIC_NODE_URL}`
+  : "http://localhost:3000";
+  
   useEffect(() => {
-    socketRef.current = io("http://localhost:3000");
+    socketRef.current = io(nodeURL);
 
     socketRef.current.emit("join-room", roomId);
 
