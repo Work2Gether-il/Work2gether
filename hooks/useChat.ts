@@ -59,6 +59,23 @@ export function useChat({sessionId, participantId} : UseRealtimeChatProps) {
         createdAt: new Date().toISOString(),
       }
 
+      // console.log('Message sent in:', sessionId)
+      const { data: { session } } = await supabase.auth.getSession();
+      await supabase.from('ChatMessages').insert({
+        // id: message.id,
+        session_id: sessionId,
+        participant_id: session?.user.id,
+        content: message.content,
+      })
+      // .throwOnError()
+      // .then(({ data, error }) => {
+      //   if (error) {
+      //     console.error('Error inserting message:', error)
+      //   } else {
+      //     console.log('Message inserted:', data)
+      //   }
+      // })
+
       // Update local state immediately for the sender
       setMessages((current) => [...current, message])
 
