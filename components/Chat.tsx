@@ -81,7 +81,7 @@ export const Chat = ({
   )
 
   return (
-    <div className="flex flex-col h-full w-full bg-background text-foreground antialiased">
+    <div className="flex flex-col bg-background text-foreground antialiased">
       {/* Messages */}
       <div ref={containerRef} className="flex-1 overflow-y-auto p-4 space-y-4">
         {allMessages.length === 0 ? (
