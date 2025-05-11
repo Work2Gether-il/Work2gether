@@ -8,7 +8,7 @@ export default async function RoomPage({
   params: { inviteCode: string }
 }) {
   const supabase = createClient();
-  const { inviteCode } = params;
+  const { inviteCode } = await params;
 
   console.log('Invite code:', inviteCode);
 
