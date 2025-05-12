@@ -1,9 +1,11 @@
 "use server"
 
 import { createClient } from "@/utils/supabase/server"
-import { Box } from "@mui/material";
+import { AppBar, Toolbar, Typography, Button, Box, Grid, Paper,IconButton } from '@mui/material';
+import { DeleteIcon } from "lucide-react";
 import CreateInviteButton from "@/components/ui/createInviteCodeButton";
-
+import deletButton from "@/components/ui/deletButton";
+import DeletButton from "@/components/ui/deletButton";
 function Items(slug:string,title:string){
     return(
         <h1>
@@ -26,9 +28,47 @@ export default async function myRooms(){
             .select('*')
             .eq('owner',user_data.user?.id);
         return(
-            <ul>
-                {rooms?.map((room) => <CreateInviteButton key={room.id} code={room.slug} isOwner={true} title={room.name}/>)}
-            </ul>
-        );
-    }
+            
+    <Box sx={{ width: '100vw', minHeight: '100vh', bgcolor: '#f5f5f5' }}>
+      {/* TopBar */}
+      <AppBar position="static" color="primary">
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          <Typography variant="h6" component="div">
+            Work2Gether
+          </Typography>
+          <Box>
+            <Button color="inherit">Créer</Button>
+            <Button color="inherit">Invitations</Button>
+            <Button color="inherit">Déconnexion</Button>
+          </Box>
+        </Toolbar>
+      </AppBar>
+
+      {/* Espace entre la topBar et le grid */}
+      <Box sx={{ mt: 4 }}>
+        <Grid container spacing={3}>
+          {rooms?.map((room) => (
+            <Grid item xs={12} sm={6} md={3} key={room.id}>
+              <Paper
+                elevation={4}
+                sx={{
+                  p: 2,
+                  textAlign: 'center',
+                  borderRadius: 2,
+                  transition: '0.3s',
+                  '&:hover': {
+                    boxShadow: 8,
+                    transform: 'scale(1.03)',
+                  },
+                }}
+              >
+                  <CreateInviteButton code={room.slug} isOwner={true} title={room.name} />
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+    </Box>
+  );
+}
 }
