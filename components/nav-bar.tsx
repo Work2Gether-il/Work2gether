@@ -4,42 +4,53 @@ import { useState } from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DrawerRoom from "./drawer-room";
+import { signOutAction } from "@/app/actions";
 
-const NavBar = () => {
+interface NavBarProps {
+  isConnected?: boolean;
+}
 
+const NavBar: React.FC<NavBarProps> = ({ isConnected = false }) => {
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  // Fonction pour ouvrir/fermer le Drawer
   const toggleDrawer = (open: boolean) => {
     setOpenDrawer(open);
   };
 
   return (
     <>
-      {/* AppBar de Material UI */}
       <AppBar position="static" sx={{ backgroundColor: '#407BA7' }}>
         <Toolbar>
-          {/* Icône Menu Hamburger à gauche */}
           <IconButton
-            sx={{ color: 'white', fontSize: '2.5rem' }}  // Augmenter la taille de l'icône du menu
+            sx={{ color: 'white', fontSize: '2.5rem' }}
             edge="start"
             onClick={() => toggleDrawer(true)}
             aria-label="menu"
           >
-             <MenuIcon sx={{ fontSize: '2.5rem' }} /> 
+            <MenuIcon sx={{ fontSize: '2.5rem' }} />
           </IconButton>
 
-          {/* Espace vide entre les icônes */}
           <Box sx={{ flexGrow: 1 }} />
 
-          {/* Icône de connexion à droite */}
           <IconButton sx={{ color: 'white' }}>
             <AccountCircleIcon />
           </IconButton>
+
+          {isConnected && (
+            <form action={signOutAction}>
+              <Button
+              type="submit"
+              sx={{ color: 'white', marginLeft: 1 }}
+              variant="text"
+              >
+              Sign Out
+            </Button>
+            </form>
+            
+          )}
         </Toolbar>
       </AppBar>
 
-      {/* Drawer à gauche */}
       <DrawerRoom openDrawer={openDrawer} toggleDrawer={toggleDrawer} />
     </>
   );

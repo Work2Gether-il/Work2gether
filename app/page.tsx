@@ -1,10 +1,4 @@
-import Hero from "@/components/hero";
-import ConnectSupabaseSteps from "@/components/tutorial/connect-supabase-steps";
-import SignUpUserSteps from "@/components/tutorial/sign-up-user-steps";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 import React from 'react';
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import CustomizedSteppers from "@/components/customize-stepper";
 import { Box, List, ListItem, ListItemIcon, ListItemText, Stack, Typography } from "@mui/material";
 import NavBar from "@/components/nav-bar";
@@ -12,11 +6,6 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 export default async function Home() {
 
-  const steps = [
-    'Création d\'une room',
-    'Invitation des membres',
-    'C\'est parti'
-  ];
   return (
     <>
       <NavBar/>
