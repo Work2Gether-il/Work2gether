@@ -30,7 +30,6 @@ export default async function myRooms(){
         return(
             
     <Box sx={{ width: '100vw', minHeight: '100vh', bgcolor: '#f5f5f5' }}>
-      {/* TopBar */}
       <AppBar position="static" color="primary">
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Typography variant="h6" component="div">
@@ -43,12 +42,10 @@ export default async function myRooms(){
           </Box>
         </Toolbar>
       </AppBar>
-
-      {/* Espace entre la topBar et le grid */}
-      <Box sx={{ mt: 4 }}>
+      <Box sx={{ mt: 4 }} justifyContent={"center"}>
         <Grid container spacing={3}>
           {rooms?.map((room) => (
-            <Grid item xs={12} sm={6} md={3} key={room.id}>
+            <Grid item xs={12} sm={6} md={4} key={room.id}>
               <Paper
                 elevation={4}
                 sx={{
