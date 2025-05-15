@@ -5,7 +5,7 @@ import { Box, Dialog, DialogActions, DialogContent, DialogTitle, Button, TextFie
 import { createClient } from "@/utils/supabase/client";
 
 const allowedDomains = ["nc-uapv.col1n.fr", "nextcloud-uapv.col1n.fr"];
-const defaultUrl = "https://nc-uapv.col1n.fr/nodoc.html";
+const defaultUrl = "https://www.col1n.fr/nodoc.html";
 
 export default function DocumentPlayer({ url: initialUrl = "", roomId }) {
   const supabase = useMemo(() => createClient(), []);
