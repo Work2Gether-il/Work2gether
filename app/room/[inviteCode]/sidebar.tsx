@@ -1,3 +1,4 @@
+"use client"
 import { Box, BoxProps } from "@mui/material"
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
@@ -7,8 +8,12 @@ import MonitorIcon from '@mui/icons-material/Monitor';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ClickableIcon from "@/components/ui/clickable-icons";
+import SensorDoorIcon from '@mui/icons-material/SensorDoor';
+import { useRouter } from 'next/navigation';
 
 const SideBar = (props : BoxProps) => {
+
+  const router = useRouter();
  return(
     <>
       <Box 
@@ -42,7 +47,7 @@ const SideBar = (props : BoxProps) => {
         }}>
             <ClickableIcon Icon={VideocamIcon} />
             <ClickableIcon Icon={MicIcon} />
-            <ClickableIcon Icon={MonitorIcon} />
+            <ClickableIcon Icon={MonitorIcon}  />
         </Box>
 
         <Box sx={{
@@ -53,7 +58,7 @@ const SideBar = (props : BoxProps) => {
             gap: 1
         }}>
             <ClickableIcon Icon={SettingsIcon} />
-            <ClickableIcon Icon={AccountCircleIcon} />
+            <ClickableIcon Icon={SensorDoorIcon} onClick={()=>router.push("/")} />
         </Box>
         
       </Box>
