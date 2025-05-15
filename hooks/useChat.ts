@@ -19,7 +19,7 @@ export interface ChatMessage {
 const EVENT_MESSAGE_TYPE = 'message'
 
 export function useChat({sessionId, participantId} : UseRealtimeChatProps) {
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [channel, setChannel] = useState<ReturnType<typeof supabase.channel> | null>(null)
   const [isConnected, setIsConnected] = useState(false)
