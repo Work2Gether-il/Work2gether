@@ -50,7 +50,7 @@ const Room = ({ sessionId, participantId, messages = [] }: { sessionId: string; 
                                 {/* Chat à droite */}
                                 {/* <ChatPart sx={{ flexShrink: 0 }} /> */}
                                 <Chat sessionId={sessionId} participantId={participantId} messages={messages} />
-²                        </Box>
+                        </Box>
                 </Box>
         </Box>
     );
