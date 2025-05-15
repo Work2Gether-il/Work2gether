@@ -29,6 +29,18 @@ export default function VideoPlayer({ url: initialUrl, roomId }) {
 
     socketRef.current.emit("join-room", roomId);
 
+    socketRef.current.on("video-state", (data) => {
+      console.log("État initial reçu :", data);
+      setUrl(data.url);
+      setPlaying(data.playing);
+
+      setTimeout(() => {
+        if (playerRef.current && data.time) {
+          playerRef.current.seekTo(data.time, "seconds");
+        }
+      }, 500);
+  });
+
     socketRef.current.on("video-action", (data) => {
       if (!playerRef.current) return;
 
