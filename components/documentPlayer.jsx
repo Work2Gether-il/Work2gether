@@ -51,7 +51,7 @@ export default function DocumentPlayer({ url: initialUrl = "", roomId }) {
   }, [url, roomId, supabase]);
 
   const handleDialogOpen = () => {
-    if(newUrl == defaultUrl)
+    if(url == defaultUrl)
       setNewUrl("");
     else
       setNewUrl(url);

@@ -38,7 +38,7 @@ const Room = ({ sessionId, participantId, messages = [] }: { sessionId: string; 
                                 >
                                 {/* Écran principal - prend tout l'espace disponible */}
                                 <Box sx={{ flexGrow: 1, minHeight: 0, backgroundColor: "black" }}>
-                                        <Screen />
+                                        <Screen roomId={sessionId} />
                                 </Box>
 
                                 {/* Liste des membres en bas */}
