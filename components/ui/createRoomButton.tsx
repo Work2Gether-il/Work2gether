@@ -1,9 +1,8 @@
 "use client"
 import { useState, useEffect } from 'react';
 import { Button, TextField, Box, Snackbar, Alert } from '@mui/material';
-import { createClient } from '@/utils/supabase/client'; // Importez votre client Supabase
-import { Text } from 'lucide-react';
-import { redirect } from 'next/navigation';
+import { createClient } from '@/utils/supabase/client';
+import { useTranslation } from "react-i18next";
 export default function CreateEntryButton() {
   const codeSize = 6
   const supabase = createClient()
@@ -129,11 +128,13 @@ export default function CreateEntryButton() {
     setSnackbar({ ...snackbar, open: false });
   };
 
+  const { t } = useTranslation();
+
   return (
     <Box sx={{ maxWidth: 400, mx: 'auto', mt: 4 }}>
       <TextField
         fullWidth
-        label="Titre de la session"
+        label={t('sessionTile')}
         variant="outlined"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
@@ -147,7 +148,7 @@ export default function CreateEntryButton() {
         disabled={loading || !session}
         fullWidth
       >
-        {loading ? 'Création...' : 'Créer une session'}
+        {loading ? t('creating...') : t('createSession')}
       </Button>
       <Snackbar
         open={snackbar.open}

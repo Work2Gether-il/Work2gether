@@ -10,6 +10,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import { StepIconProps } from '@mui/material/StepIcon';
+import { useTranslation } from 'react-i18next';
 
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
@@ -93,9 +94,11 @@ function ColorlibStepIcon(props: StepIconProps) {
   );
 }
 
-const steps = ['Créez une room', 'Invitez les membres', 'Work2gether'];
 
 const CustomizedSteppers = () => {
+  const { t } = useTranslation('common');
+
+  const steps = [t('create'), t('invite'), t('title')];
   return (
     <Stack sx={{ width: '100%' }} spacing={4}>
       <Stepper alternativeLabel activeStep={steps.length} connector={<ColorlibConnector />}>
