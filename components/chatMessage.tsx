@@ -21,7 +21,7 @@ export const ChatMessageItem = ({ message, isOwnMessage, showHeader }: ChatMessa
               'justify-end flex-row-reverse': isOwnMessage,
             })}
           >
-            <span className={'font-medium'}>{message.user.name}</span>
+            <span className={'font-medium'}>{message.user_name}</span>
             <span className="text-foreground/50 text-xs">
               {new Date(message.createdAt).toLocaleTimeString('fr-FR', {
                 hour: '2-digit',

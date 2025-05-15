@@ -6,8 +6,9 @@ import Screen from "./screen";
 import TopBar from "./topbar";
 import { createClient } from "@/utils/supabase/server";
 import Chat from "@/components/Chat";
+import { ChatMessage } from "@/hooks/useChat";
 
-const Room = ({ sessionId, participantId }: { sessionId: string; participantId: string }) => {
+const Room = ({ sessionId, participantId, messages = [] }: { sessionId: string; participantId: string; messages: ChatMessage[] }) => {
     return (
         <Box sx={{ height: "100vh", display: "flex", flexDirection: "column", width:"100%" }}>
                 <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
@@ -48,8 +49,8 @@ const Room = ({ sessionId, participantId }: { sessionId: string; participantId: 
 
                                 {/* Chat à droite */}
                                 {/* <ChatPart sx={{ flexShrink: 0 }} /> */}
-                                <Chat sessionId={sessionId} participantId={participantId} />
-                        </Box>
+                                <Chat sessionId={sessionId} participantId={participantId} messages={messages} />
+²                        </Box>
                 </Box>
         </Box>
     );

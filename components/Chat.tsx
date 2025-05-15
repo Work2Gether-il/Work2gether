@@ -92,7 +92,7 @@ export const Chat = ({
         <div className="space-y-1">
           {allMessages.map((message, index) => {
             const prevMessage = index > 0 ? allMessages[index - 1] : null
-            const showHeader = !prevMessage || prevMessage.user.name !== message.user.name
+            const showHeader = !prevMessage || prevMessage.user_name !== message.user_name
 
             return (
               <div
@@ -101,7 +101,7 @@ export const Chat = ({
               >
                 <ChatMessageItem
                   message={message}
-                  isOwnMessage={message.user.name === participantId}
+                  isOwnMessage={message.participantId === participantId}
                   showHeader={showHeader}
                 />
               </div>

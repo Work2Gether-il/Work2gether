@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, useMemo } from 'react'
 import { createClient } from '@/lib/supabase/client'
 
 interface UseRealtimeChatProps {
@@ -9,10 +9,9 @@ interface UseRealtimeChatProps {
 export interface ChatMessage {
   id?: string
   content: string
-  user: {
-    name: string
-    avatar: string
-  }
+  participantId: string
+  user_name: string
+  user_avatar?: string
   createdAt: string
 }
 
@@ -52,10 +51,9 @@ export function useChat({sessionId, participantId} : UseRealtimeChatProps) {
       const message: ChatMessage = {
         id: Math.random().toString(36).substring(2, 15),
         content,
-        user: {
-          name: participantId,
-          avatar: "https://www.freeiconspng.com/uploads/clipart--person-icon--cliparts-15.png",
-        },
+        participantId: participantId,
+        user_name: participantId,
+        user_avatar: "https://www.freeiconspng.com/uploads/clipart--person-icon--cliparts-15.png",
         createdAt: new Date().toISOString(),
       }
 
