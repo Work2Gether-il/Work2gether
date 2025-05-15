@@ -4,6 +4,13 @@ import CreateEntryButton from "@/components/ui/createRoomButton";
 
 export default async function CreateRoom(){
     return(
-       <CreateEntryButton/>
+        <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="100vh"
+            >
+            <CreateEntryButton/>
+        </Box> 
     )
 }

@@ -6,7 +6,6 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
-import TranslateIcon from '@mui/icons-material/Translate';
 
 const TopBar = (props:BoxProps) =>{
     return (
@@ -28,9 +27,6 @@ const TopBar = (props:BoxProps) =>{
                 <Box sx={{ flex: 1}}>
                     <ClickableIcon Icon={YouTubeIcon} />
                     <ClickableIcon Icon={LiveTvIcon} />
-                </Box>
-                <Box sx={{ flex: 1, }}>
-                    <ClickableIcon Icon={TranslateIcon} />
                 </Box>
             </Box>
         </>
